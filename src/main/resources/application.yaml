@@ -1,0 +1,38 @@
+
+server:
+  port: ${THOMAS_V_ALLEN_PORT}
+
+spring:
+  application:
+    name: AppointmentBookingSystem
+
+  datasource:
+    name: mysql
+    url: ${THOMAS_V_ALLEN_DB}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG #Use DEBUG during development, use INFO during production
+
+app:
+  super-admin:
+    email: ${SUPER_ADMIN_EMAIL}
+    password: ${SUPER_ADMIN_PASSWORD}
+
