@@ -26,23 +26,11 @@ public class ApiResponse<T> {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Map<String, Object> metadata = new HashMap<>();
 
-    public static <T> ApiResponse<T> success(T data, String message, Map<String, Object> metadata ) {
-        return ApiResponse.<T>builder()
-                .data(data)
-                .metadata(metadata)
-                .success(true)
-                .message(message)
-                .status(HttpStatus.OK)
-                .timestamp(Instant.now())
-                .build();
-    }
 
-    // Static factory methods
-    public static <T> ApiResponse<T> success(T data, String message ) {
+    public static <T> ApiResponse<T> success(T data) {
         return ApiResponse.<T>builder()
                 .data(data)
                 .success(true)
-                .message(message)
                 .status(HttpStatus.OK)
                 .timestamp(Instant.now())
                 .build();
@@ -58,12 +46,43 @@ public class ApiResponse<T> {
                 .build();
     }
 
+    public static <T> ApiResponse<T> success(T data, String message ) {
+        return ApiResponse.<T>builder()
+                .data(data)
+                .success(true)
+                .message(message)
+                .status(HttpStatus.OK)
+                .timestamp(Instant.now())
+                .build();
+    }
+
+    public static <T> ApiResponse<T> success(T data, String message, Map<String, Object> metadata ) {
+        return ApiResponse.<T>builder()
+                .data(data)
+                .metadata(metadata)
+                .success(true)
+                .message(message)
+                .status(HttpStatus.OK)
+                .timestamp(Instant.now())
+                .build();
+    }
+
     public static <T> ApiResponse<T> created(T data, String message) {
         return ApiResponse.<T>builder()
                 .data(data)
                 .success(false)
                 .message(message)
                 .status(HttpStatus.FORBIDDEN)
+                .timestamp(Instant.now())
+                .build();
+    }
+
+    public static <T> ApiResponse<T> accepted(String message) {
+        return ApiResponse.<T>builder()
+                .data(null)
+                .success(true)
+                .message(message)
+                .status(HttpStatus.ACCEPTED)
                 .timestamp(Instant.now())
                 .build();
     }

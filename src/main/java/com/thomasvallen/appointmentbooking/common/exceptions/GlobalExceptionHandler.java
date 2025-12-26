@@ -4,6 +4,7 @@ import com.thomasvallen.appointmentbooking.common.utils.ApiResponse;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +30,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AuthenticationFailedException.class)
     public ResponseEntity<ApiResponse<Object>> handleAuthenticationFailedException(
-            AuthenticationFailedException ex) {
+            @NotNull AuthenticationFailedException ex) {
         log.error("Authentication failed: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(ApiResponse.unauthorized(ex.getMessage()));
@@ -36,7 +38,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserNotVerifiedException.class)
     public ResponseEntity<ApiResponse<Object>> handleUserNotVerifiedException(
-            UserNotVerifiedException ex) {
+            @NotNull UserNotVerifiedException ex) {
         log.error("User not verified: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(ApiResponse.forbidden(ex.getMessage()));
@@ -44,7 +46,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserAccountException.class)
     public ResponseEntity<ApiResponse<Object>> handleUserAccountException(
-            UserAccountException ex) {
+            @NotNull UserAccountException ex) {
         log.error("User account error: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(ApiResponse.forbidden(ex.getMessage()));
@@ -52,7 +54,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidTokenException.class)
     public ResponseEntity<ApiResponse<Object>> handleInvalidTokenException(
-            InvalidTokenException ex) {
+            @NotNull InvalidTokenException ex) {
         log.error("Invalid token: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(ApiResponse.unauthorized(ex.getMessage()));
@@ -60,7 +62,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiResponse<Object>> handleResourceNotFoundException(
-            ResourceNotFoundException ex) {
+            @NotNull ResourceNotFoundException ex) {
         log.error("Resource not found: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(ApiResponse.unauthorized(ex.getMessage()));
@@ -68,7 +70,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<Object>> handleValidationException(
-            MethodArgumentNotValidException ex) {
+            @NotNull MethodArgumentNotValidException ex) {
         Map<String, Object> validationErrors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error ->
                 validationErrors.put(error.getField(), error.getDefaultMessage())
@@ -90,7 +92,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ApiResponse<Object>> handleHttpMessageNotReadableException(
-            HttpMessageNotReadableException ex) {
+            @NotNull HttpMessageNotReadableException ex) {
         log.error("Invalid request body: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ApiResponse.badRequest("Invalid request body format"));
@@ -98,7 +100,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ApiResponse<Object>> handleConstraintViolationException(
-            ConstraintViolationException ex) {
+            @NotNull ConstraintViolationException ex) {
         Map<String, Object> violations = new HashMap<>();
 
         ex.getConstraintViolations().forEach(violation ->
@@ -115,7 +117,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ApiResponse<Object>> handleDataIntegrityViolationException(
-            DataIntegrityViolationException ex) {
+            @NotNull DataIntegrityViolationException ex) {
         log.error("Data integrity violation: {}", ex.getMessage());
 
         String message = "Data integrity violation: Duplicate entry or constraint violation";
@@ -129,7 +131,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ApiResponse<Object>> handleEntityNotFoundException(
-            EntityNotFoundException ex) {
+            @NotNull EntityNotFoundException ex) {
         log.error("Entity not found: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(ApiResponse.notFound(ex.getMessage()));
@@ -137,7 +139,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ApiResponse<Object>> handleIllegalArgumentException(
-            IllegalArgumentException ex) {
+            @NotNull IllegalArgumentException ex) {
         log.error("Illegal argument: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ApiResponse.badRequest(ex.getMessage()));
@@ -145,7 +147,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<ApiResponse<Object>> handleHttpRequestMethodNotSupported(
-            HttpRequestMethodNotSupportedException ex) {
+            @NotNull HttpRequestMethodNotSupportedException ex) {
         log.error("Method not allowed: {}", ex.getMessage());
         String message = "HTTP method not allowed for this endpoint";
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED)
@@ -154,7 +156,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiResponse<Object>> handleAccessDeniedException(
-            AccessDeniedException ex) {
+            @NotNull AccessDeniedException ex) {
         log.error("Access denied: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(ApiResponse.forbidden("Access denied: You do not have permission to access this resource"));
@@ -162,7 +164,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ApiResponse<Object>> handleBadCredentialsException(
-            BadCredentialsException ex) {
+            @NotNull BadCredentialsException ex) {
         log.error("Bad credentials: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(ApiResponse.unauthorized("Invalid email or password"));
@@ -170,7 +172,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DisabledException.class)
     public ResponseEntity<ApiResponse<Object>> handleDisabledException(
-            DisabledException ex) {
+            @NotNull DisabledException ex) {
         log.error("User disabled: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(ApiResponse.forbidden("User account is disabled"));
@@ -178,7 +180,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(LockedException.class)
     public ResponseEntity<ApiResponse<Object>> handleLockedException(
-            LockedException ex) {
+            @NotNull LockedException ex) {
         log.error("User locked: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(ApiResponse.forbidden("User account is locked"));
@@ -186,10 +188,34 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ApiResponse<Object>> handleAuthenticationException(
-            AuthenticationException ex) {
+            @NotNull AuthenticationException ex) {
         log.error("Authentication exception: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(ApiResponse.unauthorized("Authentication failed"));
+    }
+
+    @ExceptionHandler(DuplicateSubscriptionException.class)
+    public ResponseEntity<ApiResponse<Object>> handleDuplicateSubscription(
+            @NotNull DuplicateSubscriptionException ex, WebRequest request) {
+        log.error("Duplicate subscription: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ApiResponse.conflict(ex.getMessage()));
+    }
+
+    @ExceptionHandler(EmailSenderNotFoundException.class)
+    public ResponseEntity<ApiResponse<Object>> handleEmailSenderNotFound(
+            @NotNull EmailSenderNotFoundException ex ) {
+        log.error("Email sender not found: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ApiResponse.error("Email service configuration error"));
+    }
+
+    @ExceptionHandler(NewsletterSubscriberNotFoundException.class)
+    public ResponseEntity<ApiResponse<Object>> handleNewsletterSubscriberNotFoundException(
+            @NotNull NewsletterSubscriberNotFoundException ex ) {
+        log.error("Subscriber not found: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.conflict(ex.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)

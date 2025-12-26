@@ -6,6 +6,7 @@ import com.thomasvallen.appointmentbooking.enums.AccountStatus;
 import com.thomasvallen.appointmentbooking.enums.Role;
 import com.thomasvallen.appointmentbooking.repository.UserProfileRepository;
 import com.thomasvallen.appointmentbooking.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -15,17 +16,13 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class SuperAdminInitializer implements ApplicationRunner {
 
     private final UserRepository userRepository;
     private final UserProfileRepository userProfileRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public SuperAdminInitializer(UserRepository userRepository, UserProfileRepository userProfileRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.userProfileRepository = userProfileRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Value("${app.super-admin.email}")
     private String email;

@@ -3,7 +3,6 @@ package com.thomasvallen.appointmentbooking.entity;
 import com.thomasvallen.appointmentbooking.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(
