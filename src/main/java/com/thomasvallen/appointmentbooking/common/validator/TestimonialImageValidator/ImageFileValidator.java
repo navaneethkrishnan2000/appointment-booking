@@ -25,10 +25,15 @@ public class ImageFileValidator
     @Override
     public boolean isValid(MultipartFile file, ConstraintValidatorContext context) {
 
+        if (file == null || file.isEmpty()) {
+            return true;
+        }
+
         if (file.getSize() > maxSize) {
             return false;
         }
 
-        return ALLOWED_TYPES.contains(file.getContentType());
+        String contentType = file.getContentType();
+        return contentType != null && ALLOWED_TYPES.contains(contentType);
     }
 }

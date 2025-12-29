@@ -53,7 +53,7 @@ public class AdminTestimonialController {
         return new ResponseEntity<>(response, response.getStatus());
     }
 
-    @PatchMapping(
+    @PutMapping(
             value = "/update/{id}",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )

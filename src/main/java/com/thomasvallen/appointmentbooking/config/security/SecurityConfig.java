@@ -35,24 +35,30 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**",
-                                "/api/form/**").permitAll()
+                                "/api/form/**",
+                                "/api/admin/testimonials/get/all",
+                                "/api/admin/team/member/get/all"
+                        ).permitAll()
 
-                        .requestMatchers(
-                                "/actuator/health",
-                                "/actuator/info").permitAll()
+                        .requestMatchers("/actuator/health",
+                                "/actuator/info")
+                        .permitAll()
 
-                        .requestMatchers(
-                                "/swagger-ui/**",
+                        .requestMatchers("/swagger-ui/**",
                                 "/v3/api-docs/**",
-                                "/swagger-resources/**").permitAll()
+                                "/swagger-resources/**"
+                        ).permitAll()
 
-                        .requestMatchers("/api/auth/super-admin/**").hasAuthority("SUPER_ADMIN")
+                        .requestMatchers("/api/auth/super-admin/**",
+                                "/api/admin/team/member/**")
+                        .hasRole("SUPER_ADMIN")
 
-                        .requestMatchers("/api/staff/**").hasAuthority("STAFF")
+                        .requestMatchers("/api/staff/**")
+                        .hasRole("STAFF")
 
                         .requestMatchers("/api/admin/newsletter/**",
-                                "/api/admin/testimonials/**"
-                                ).hasAnyRole("SUPER_ADMIN", "STAFF")
+                                "/api/admin/testimonials/**")
+                        .hasAnyRole("SUPER_ADMIN", "STAFF")
 
                         .anyRequest().authenticated()
                 )
