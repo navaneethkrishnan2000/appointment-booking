@@ -50,6 +50,10 @@ public class SecurityConfig {
 
                         .requestMatchers("/api/staff/**").hasAuthority("STAFF")
 
+                        .requestMatchers("/api/admin/newsletter/**",
+                                "/api/admin/testimonials/**"
+                                ).hasAnyRole("SUPER_ADMIN", "STAFF")
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(
