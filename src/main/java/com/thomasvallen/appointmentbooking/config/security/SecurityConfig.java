@@ -37,7 +37,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**",
                                 "/api/form/**",
                                 "/api/admin/testimonials/get/all",
-                                "/api/admin/team/member/get/all"
+                                "/api/admin/team/member/get/all",
+                                "/api/admin/events/upcoming"
                         ).permitAll()
 
                         .requestMatchers("/actuator/health",
@@ -49,11 +50,11 @@ public class SecurityConfig {
                                 "/swagger-resources/**"
                         ).permitAll()
 
-                        .requestMatchers("/api/auth/super-admin/**",
+                        .requestMatchers("/api/admin/staff/**",
                                 "/api/admin/team/member/**")
                         .hasRole("SUPER_ADMIN")
 
-                        .requestMatchers("/api/staff/**")
+                        .requestMatchers("/api/admin/staff/{staffId}")
                         .hasRole("STAFF")
 
                         .requestMatchers("/api/admin/newsletter/**",
