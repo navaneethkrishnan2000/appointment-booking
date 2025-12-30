@@ -3,6 +3,8 @@ package com.thomasvallen.appointmentbooking.repository;
 import com.thomasvallen.appointmentbooking.dto.projections.UserSecurityProjection;
 import com.thomasvallen.appointmentbooking.entity.User;
 import com.thomasvallen.appointmentbooking.enums.Role;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -39,5 +41,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
             """)
     void updateLastLogin(@Param("userId") Long userId,
                          @Param("lastLogin") Instant lastLogin);
+
+    Page<User> findByRole(Role role, Pageable pageable);
 
 }

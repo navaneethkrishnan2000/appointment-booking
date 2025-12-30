@@ -10,9 +10,10 @@ import org.jetbrains.annotations.NotNull;
 import java.time.Instant;
 
 @Entity
-@Getter @Setter
 @Table(name = "users")
-@AllArgsConstructor @NoArgsConstructor @Builder
+@Getter @Setter
+@AllArgsConstructor @NoArgsConstructor
+@Builder
 public class User extends BaseEntity {
 
     @Column(nullable = false, unique = true)

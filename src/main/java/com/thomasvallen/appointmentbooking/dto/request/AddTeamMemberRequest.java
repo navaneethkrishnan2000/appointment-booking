@@ -4,12 +4,12 @@ import com.thomasvallen.appointmentbooking.common.validator.TestimonialImageVali
 import com.thomasvallen.appointmentbooking.enums.TeamMemberType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 @Getter
-@Setter
+@AllArgsConstructor
 public class AddTeamMemberRequest {
 
     @NotBlank(message = "Name is required")

@@ -143,7 +143,8 @@ public class TestimonialService implements ITestimonialService {
 
         return ApiResponse.success(
                 testimonialResponses,
-                "Testimonials fetched successfully"
+                "Testimonials fetched successfully",
+                metadata
         );
     }
 

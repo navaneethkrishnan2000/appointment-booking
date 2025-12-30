@@ -10,33 +10,16 @@ import java.time.Instant;
 public record StaffResponse(
 
         Long id,
-
         String name,
-
         String email,
-
         String phoneNumber,
-
         Role role,
-
         AccountStatus accountStatus,
-
         String department,
-
         String designation,
-
         Boolean isVerified,
-
         Boolean isProfileComplete,
-
         Instant lastLogin,
-
-        Long createdByAdminId,
-
-        Long updatedByAdminId,
-
-        Instant createdAt,
-
-        Instant updatedAt
+        Long createdByAdminId
 ) {
 }

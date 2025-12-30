@@ -12,9 +12,6 @@ public record AddStaffRequest(
         @Email(message = "Invalid email format")
         String email,
 
-//        @NotBlank
-//        String password,
-
         String phoneNumber,
 
         String department,

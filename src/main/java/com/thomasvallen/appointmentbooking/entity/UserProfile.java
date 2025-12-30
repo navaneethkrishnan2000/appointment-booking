@@ -33,5 +33,6 @@ public class UserProfile extends BaseEntity {
 
     private String bio;
 
-    private String profilePhotoUrl;
+    @Lob
+    private byte[] profileImage;
 }
