@@ -21,8 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @Slf4j
@@ -49,7 +47,7 @@ public class FormService implements IFormService {
 
     @Override // SMTP
     @Async
-    public ApiResponse<String> sendEmailForContactUs(@NotNull EmailRequest request) {
+    public void sendEmailForContactUs(@NotNull EmailRequest request) {
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper =
@@ -64,13 +62,10 @@ public class FormService implements IFormService {
 
             log.info("Contact-us email sent from {}", request.getEmail());
 
-            return ApiResponse.success(
-                    "Message sent successfully. We will contact you soon."
-            );
-
         } catch (MailException | MessagingException ex) {
             log.error("Failed to send contact-us email from {}",
                     request.getEmail(), ex);
+
             throw new EmailSendException("Unable to send email at the moment");
         }
     }

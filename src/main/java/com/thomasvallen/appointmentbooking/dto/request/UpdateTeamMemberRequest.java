@@ -1,6 +1,6 @@
 package com.thomasvallen.appointmentbooking.dto.request;
 
-import com.thomasvallen.appointmentbooking.common.validator.TestimonialImageValidator.ValidImageFile;
+import com.thomasvallen.appointmentbooking.common.validator.testimonial_image_validator.ValidImageFile;
 import com.thomasvallen.appointmentbooking.enums.TeamMemberType;
 import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotBlank;

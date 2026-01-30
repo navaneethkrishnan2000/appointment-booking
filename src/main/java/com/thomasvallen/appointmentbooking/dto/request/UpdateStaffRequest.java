@@ -1,6 +1,6 @@
 package com.thomasvallen.appointmentbooking.dto.request;
 
-import com.thomasvallen.appointmentbooking.common.validator.TestimonialImageValidator.ValidImageFile;
+import com.thomasvallen.appointmentbooking.common.validator.testimonial_image_validator.ValidImageFile;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

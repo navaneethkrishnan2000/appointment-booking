@@ -23,8 +23,10 @@ public class FormController {
     public ResponseEntity<ApiResponse<String>> sendEmailForContactUs(
             @Valid @RequestBody EmailRequest request
     ) {
-        ApiResponse<String> response = formService.sendEmailForContactUs(request);
-        return new ResponseEntity<>(response, response.getStatus());
+       formService.sendEmailForContactUs(request);
+        return ResponseEntity.ok(
+                ApiResponse.success("Message sent successfully. We will contact you soon.")
+        );
     }
 
     @PostMapping(

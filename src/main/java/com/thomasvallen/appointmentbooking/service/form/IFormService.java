@@ -7,7 +7,7 @@ import jakarta.validation.Valid;
 
 public interface IFormService {
 
-    ApiResponse<String> sendEmailForContactUs(@Valid EmailRequest request) ;
+   void sendEmailForContactUs(@Valid EmailRequest request) ;
 
     ApiResponse<String> saveConsultationForm(@Valid ConsultationFormRequest request);
 }

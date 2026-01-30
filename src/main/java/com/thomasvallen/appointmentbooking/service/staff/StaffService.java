@@ -9,7 +9,6 @@ import com.thomasvallen.appointmentbooking.dto.request.AddStaffRequest;
 import com.thomasvallen.appointmentbooking.dto.request.UpdateStaffRequest;
 import com.thomasvallen.appointmentbooking.dto.response.StaffResponse;
 import com.thomasvallen.appointmentbooking.common.utils.ApiResponse;
-import com.thomasvallen.appointmentbooking.dto.response.TestimonialResponse;
 import com.thomasvallen.appointmentbooking.entity.User;
 import com.thomasvallen.appointmentbooking.entity.UserProfile;
 import com.thomasvallen.appointmentbooking.enums.AccountStatus;

@@ -1,4 +1,4 @@
-package com.thomasvallen.appointmentbooking.common.validator.TestimonialImageValidator;
+package com.thomasvallen.appointmentbooking.common.validator.testimonial_image_validator;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
